@@ -2,9 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Translatable\Attributes\Translatable;
 
+#[Fillable(['name', 'icon_class'])]
+#[Translatable(['name'])]
+#[Table('amenities')]
 class Amenity extends Model
 {
-    //
+    public function rooms(): BelongsToMany
+    {
+        return $this->belongsToMany(Room::class, 'room_amenity');
+    }
 }
