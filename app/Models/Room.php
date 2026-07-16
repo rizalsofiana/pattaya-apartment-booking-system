@@ -4,17 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\Attributes\Translatable;
+use Spatie\Translatable\HasTranslations;
 
 #[Fillable(['property_id', 'name', 'slug', 'description', 'base_price', 'capacity_adults', 'capacity_children', 'room_size', 'is_active'])]
 #[Translatable(['name', 'description'])]
 #[Table('rooms')]
 class Room extends Model
 {
+    use HasFactory, HasTranslations;
+    
     public function property(): BelongsTo
     {
         return $this->belongsTo(Property::class);

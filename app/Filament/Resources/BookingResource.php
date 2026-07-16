@@ -40,7 +40,7 @@ class BookingResource extends Resource
 
                 Forms\Components\Section::make('Detail Reservasi')->schema([
                     Forms\Components\TextInput::make('booking_code')
-                        ->default(fn () => 'BK-'.strtoupper(uniqid()))
+                        ->default(fn() => 'BK-' . strtoupper(uniqid()))
                         ->disabled()
                         ->dehydrated()
                         ->required()
@@ -68,10 +68,10 @@ class BookingResource extends Resource
                         ->preload(),
                     Forms\Components\Select::make('status')
                         ->options([
-                            'pending' => 'Pending',
-                            'confirmed' => 'Confirmed',
-                            'cancelled' => 'Cancelled',
-                            'completed' => 'Completed',
+                            'pending' => 'pending',
+                            'paid' => 'paid',
+                            'cancelled' => 'cancelled',
+                            'completed' => 'completed',
                         ])
                         ->required()
                         ->default('pending'),
@@ -95,7 +95,7 @@ class BookingResource extends Resource
                 Tables\Columns\TextColumn::make('guest_first_name')
                     ->label('Tamu')
                     ->searchable()
-                    ->formatStateUsing(fn ($record) => $record->guest_first_name.' '.$record->guest_last_name),
+                    ->formatStateUsing(fn($record) => $record->guest_first_name . ' ' . $record->guest_last_name),
                 Tables\Columns\TextColumn::make('room.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('check_in')
@@ -109,9 +109,9 @@ class BookingResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'pending' => 'warning',
-                        'confirmed' => 'success',
+                        'paid' => 'success',
                         'cancelled' => 'danger',
                         'completed' => 'info',
                     }),
