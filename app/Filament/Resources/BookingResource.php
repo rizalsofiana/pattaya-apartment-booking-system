@@ -23,7 +23,7 @@ class BookingResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Informasi Tamu')->schema([
                     Forms\Components\TextInput::make('guest_first_name')
-                        ->required()
+                        ->required()           
                         ->maxLength(255),
                     Forms\Components\TextInput::make('guest_last_name')
                         ->required()
